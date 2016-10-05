@@ -45,7 +45,7 @@ app.route('/spoiler')
 
     res.json({
       response_type: 'in_channel',
-      text: title
+      text: title,
       attachments: [{
         text: spoiler
       }]
