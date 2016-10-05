@@ -18,10 +18,13 @@ app.use(morgan('dev'))
 
 app.route('/spoiler')
   .get(function (req, res) {
+    console.error('GET request');
     res.sendStatus(200)
   })
   .post(bodyParser.urlencoded({ extended: true }), function (req, res) {
+    console.error('POST request');
     if (req.body.token !== VERIFY_TOKEN) {
+      console.error('Bad Verify');
       return res.sendStatus(401)
     }
 
@@ -32,6 +35,7 @@ app.route('/spoiler')
       message = "Sorry, I can't offer much help, just here to beep and boop"
     }
 
+    console.error('Returning: %s', message);
     res.json({
       response_type: 'in_channel',
       text: message
