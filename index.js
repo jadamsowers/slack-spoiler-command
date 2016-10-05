@@ -44,23 +44,24 @@ app.route('/spoiler')
     }
 
     res.json({
-      response_type: 'in_channel',
-      attachments: [{
-        callback_id: "spoiler-callback",
-        title: title,
-        attachment_type: "default",
-        fallback: "Uh oh - doesn't look like your device supports this",
-        actions: [{
-            name: "Click to view spoiler",            
-            style: "danger",
-            confirm: {
-                title: "Spoiler",
-                text: spoiler
+      "response_type": "in_channel",
+      "attachments": [{
+        "callback_id": "spoiler-callback",
+        "title": title,
+        "attachment_type": "default",
+        "fallback": "Uh oh - doesn't look like your device supports this",
+        "actions": [{
+            "name": "view",       
+            "text": "Click to view spoiler",
+            "style": "danger",
+			"type": "button",
+            "confirm": {
+                "title": "Spoiler",
+                "text": spoiler
             }
         }]
       }]
     })
-  })
 
 app.listen(PORT, function (err) {
   if (err) {
