@@ -3,3 +3,4 @@ description: Command for hiding spoiler messages behind a user prompt
 avatar: images/avatar.png
 slackscopes:
   - commands
+  - bot
