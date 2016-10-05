@@ -39,7 +39,7 @@ app.route('/spoiler')
         title = user + ' just posted a spoiler.'
         spoiler = params[0];
     } else {
-        title = params[0]
+        title = user + ' ' + params[0]
         spoiler = params[1];
     }
 
@@ -47,7 +47,14 @@ app.route('/spoiler')
       response_type: 'in_channel',
       text: title,
       attachments: [{
-        text: spoiler
+        actions: [{
+            name: "Click to view spoiler",
+            style: "danger",
+            confirm: {
+                title: "Spoiler",
+                text: spoiler
+            }
+        }]
       }]
     })
   })
