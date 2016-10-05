@@ -16,7 +16,7 @@ if (!PORT) {
 var app = express()
 app.use(morgan('dev'))
 
-app.route('/beepboop')
+app.route('/spoiler')
   .get(function (req, res) {
     res.sendStatus(200)
   })
@@ -33,7 +33,7 @@ app.route('/beepboop')
     }
 
     res.json({
-      response_type: 'ephemeral',
+      response_type: 'in_channel',
       text: message
     })
   })
