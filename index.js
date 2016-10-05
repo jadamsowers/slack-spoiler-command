@@ -16,9 +16,20 @@ if (!PORT) {
 var app = express()
 app.use(morgan('dev'))
 
+app.route('/spoiler-callback')
+.get(function (req, res) {
+    res.sendStatus(200);
+})
+.post(bodyParser.urlencoded({ extended: true }), function (req, res) {
+    if (req.body.token !== VERIFY_TOKEN) {
+        return res.sendStatus(401);
+    }
+    res.sendStatus(200);
+});
+
 app.route('/spoiler')
 .get(function (req, res) {
-    res.sendStatus(200)
+    res.sendStatus(200);
 })
 .post(bodyParser.urlencoded({ extended: true }), function (req, res) {
     if (req.body.token !== VERIFY_TOKEN) {
