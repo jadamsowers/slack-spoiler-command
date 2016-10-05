@@ -18,27 +18,37 @@ app.use(morgan('dev'))
 
 app.route('/spoiler')
   .get(function (req, res) {
-    console.error('GET request');
     res.sendStatus(200)
   })
   .post(bodyParser.urlencoded({ extended: true }), function (req, res) {
-    console.error('POST request');
     if (req.body.token !== VERIFY_TOKEN) {
-      console.error('Bad Verify');
       return res.sendStatus(401)
     }
 
-    var message = 'boopbeep'
-
-    // Handle any help requests
-    if (req.body.text === 'help') {
-      message = "Sorry, I can't offer much help, just here to beep and boop"
+    var user = req.body.user_name;
+    var params = req.body.text.match(/\w+|"[^"]+"/g) //split our (possibly quoted) params
+    if (params.length === 0) {
+        return res.json({
+          response_type: 'ephemeral',
+          text: 'You didnt enter anything to spoiler text.'
+        });
+    }
+    
+    var title, spoiler;
+    if (params.length === 1) {
+        title = user + ' just posted a spoiler.'
+        spoiler = params[0];
+    } else {
+        title = params[0]
+        spoiler = params[1];
     }
 
-    console.error('Returning: %s', message);
     res.json({
       response_type: 'in_channel',
-      text: message
+      text: title
+      attachments: [{
+        text: spoiler
+      }]
     })
   })
 
