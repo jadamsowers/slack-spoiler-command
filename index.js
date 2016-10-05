@@ -43,7 +43,8 @@ app.route('/spoiler')
         spoiler = params[0];
     } else {
         title = user + ' ' + params[0];
-        spoiler = params[1];
+        params.splice(index, 1);
+        spoiler = params.join(' ');
     }
 
     res.json({
