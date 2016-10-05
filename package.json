@@ -1,31 +1,28 @@
 {
-  "name": "node-slash-command",
-  "version": "0.0.0",
-  "description": "Node Slack slash command example",
+  "name": "node-slack-bot",
+  "version": "1.0.0",
+  "description": "A sample Beep Boop Node.js Slackbot",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "standard"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BeepBoopHQ/node-slash-command.git"
+    "url": "git+https://github.com/joshvote/slack-spoiler-command.git"
   },
   "keywords": [
-    "slack",
-    "slash",
-    "command"
+    "slackbot",
+    "bot",
+    "slack"
   ],
-  "author": "Brad Harris",
+  "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BeepBoopHQ/node-slash-command/issues"
+    "url": "https://github.com/joshvote/slack-spoiler-command/issues"
   },
+  "homepage": "https://github.com/joshvote/slack-spoiler-command#readme",
   "dependencies": {
     "beepboop-botkit": "^1.4.1",
     "botkit": "~0.2.2"
-  },
-  "devDependencies": {
-    "standard": "^6.0.8"
   }
 }
