@@ -35,8 +35,11 @@ app.route('/spoiler')
     }
     
     var title, spoiler;
-    if (params.length === 1) {
-        title = user + ' just posted a spoiler.'
+    if (req.body.text.indexOf('"') < 0) {
+        title = user + ' just posted a spoiler.';
+        spoiler = req.body.text;
+    } else if (params.length === 1) {
+        title = user + ' just posted a spoiler.';
         spoiler = params[0];
     } else {
         title = user + ' ' + params[0]
