@@ -1,6 +1,3 @@
-var express = require('express');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
 var Botkit = require('botkit')
 
 var token = process.env.SLACK_TOKEN
