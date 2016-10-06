@@ -89,3 +89,9 @@ controller.on('slash_command', function(bot, message) {
         }]
     });
 });
+
+// receive an interactive message, and reply with a message that will replace the original
+controller.on('interactive_message_callback', function(bot, message) {
+    // check message.actions and message.callback_id to see what action to take...
+    bot.replyPrivateDelayed(message, 'Sike! - Still gotta find the original spoiler text :(');
+});
