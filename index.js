@@ -68,8 +68,7 @@ controller.on('slash_command', function(bot, message) {
             "callback_id": "spoiler-callback",
             "title": title,
             "attachment_type": "default",
-            "fallback": "Uh oh - doesn't look like your device supports this",            
-            "spoiler": spoiler,
+            "fallback": spoiler, //smuggle our spoiler text in through here (sucks to be on an unsupported device)
             "actions": [{
                 "name": "view",       
                 "text": "Click to view spoiler",
@@ -88,6 +87,9 @@ controller.on('interactive_message_callback', function(bot, message) {
         return bot.res.send(401, 'Unauthorized');
     }
     
+    var channel = message.channel;
+    var user = message.user;
+    var spoiler = message.original_message.attachments[0].fallback;
     // check message.actions and message.callback_id to see what action to take...
-    bot.replyPublicDelayed(message, 'OK need to send a message to channel ' + message.channel + ' and message ' + message.original_message.attachments[0].spoiler + ' || ' + JSON.stringify(message));
+    bot.replyPublicDelayed(message, 'OK need to send a message to channel ' + channel + ' and message ' + spoiler);
 });
