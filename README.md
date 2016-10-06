@@ -7,4 +7,6 @@ A basic [Slack slash command](https://api.slack.com/slash-commands) in node.js f
 
 Exposes a `/spoiler` route that is intended to power a Slack slash command for providing spoiler text for both mobile and desktop.
 
-It's also really buggy, but sort of works.
+Due to hosting costs the slack app is currently unpublished in the slack store. You should be able to create your own fork of this and run it at beepboophq or elsewhere easily enough.
+
+
