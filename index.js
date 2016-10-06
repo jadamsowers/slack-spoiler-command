@@ -91,5 +91,5 @@ controller.on('interactive_message_callback', function(bot, message) {
     var user = message.user;
     var spoiler = message.original_message.attachments[0].fallback;
     // check message.actions and message.callback_id to see what action to take...
-    bot.replyPublicDelayed(message, 'OK need to send a message to channel ' + channel + ' and message ' + spoiler);
+    bot.replyPublic(message, 'OK need to send a message to channel ' + channel + ' and message ' + spoiler);
 });
