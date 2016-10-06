@@ -32,7 +32,10 @@ controller.setupWebserver(PORT, function(err, webserver) {
 
 controller.on('slash_command', function(bot, message) {
     if (message.command !== "/spoiler") {
-        console.log('Skipping command: ' + message.command);
+        bot.replyPrivate(message, {
+          response_type: 'ephemeral',
+          text: 'I honestly dont know what to do with command "' + message.command + '"'
+        });
         return;
     }
     
@@ -77,10 +80,6 @@ controller.on('slash_command', function(bot, message) {
             }]
         }]
     });
-    
-    console.log('Forcing an ACK:', bot.res);
-    bot.res.end();
-    console.log('ACK sent');
 });
 
 // receive an interactive message, and reply with a message that will replace the original
