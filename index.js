@@ -33,15 +33,22 @@ if (token) {
 }
 
 controller.setupWebserver(PORT, function(err, webserver) {
-    controller.createWebhookEndpoints(webserver);
+    if (err) {
+        console.error(err)
+        process.exit(1)
+    }
+    // Setup our slash command webhook endpoints
+    controller.createWebhookEndpoints(webserver)
 });
 
 controller.on('bot_channel_join', function (bot, message) {
-  bot.reply(message, "I'm here!")
+    bot.reply(message, "I'm here!")
 })
 
 controller.on('slash_command', function(bot, message) {
-    if (message.command !== "spoiler") {
+    bot.replyPublic(message, message.user + " used command " + message.command + " args: " + message.text);
+    
+    /*if (message.command !== "/spoiler") {
         console.log('Skipping command: ' + message.command);
         return;
     }
@@ -86,5 +93,5 @@ controller.on('slash_command', function(bot, message) {
                 }
             }]
         }]
-    });
+    });*/
 });
