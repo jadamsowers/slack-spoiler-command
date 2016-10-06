@@ -46,8 +46,8 @@ controller.on('bot_channel_join', function (bot, message) {
 })
 
 controller.on('slash_command', function(bot, message) {
-    bot.replyPrivate(message, message.user_name + " used command " + message.command + " args: " + message.text);
-    bot.replyPublic(message, "PUBLIC INFO");
+    bot.replyPublicDelayed(message, message.user_name + " used command " + message.command + " args: " + message.text);
+    //bot.replyPublic(message, "PUBLIC INFO");
     /*if (message.command !== "/spoiler") {
         console.log('Skipping command: ' + message.command);
         return;
