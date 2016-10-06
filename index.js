@@ -27,12 +27,15 @@ controller.setupWebserver(PORT, function(err, webserver) {
         process.exit(1)
     }
     // Setup our slash command webhook endpoints
-    controller.createWebhookEndpoints(webserver, [VERIFY_TOKEN])
+    controller.createWebhookEndpoints(webserver)
 });
 
 controller.on('slash_command', function(bot, message) {
+    if (message.token !== VERIFY_TOKEN) {
+        return bot.res.send(401, 'Unauthorized');
+    }
     if (message.command !== "/spoiler") {
-        console.error('I honestly dont know what to do with command "' + message.command + '"');
+        return bot.res.send(200, '');
         return;
     }
     
@@ -82,6 +85,10 @@ controller.on('slash_command', function(bot, message) {
 
 // receive an interactive message, and reply with a message that will replace the original
 controller.on('interactive_message_callback', function(bot, message) {
+    if (message.token !== VERIFY_TOKEN) {
+        return bot.res.send(401, 'Unauthorized');
+    }
+    
     // check message.actions and message.callback_id to see what action to take...
     bot.replyPrivateDelayed(message, 'Sike! - Still gotta find the original spoiler text :(');
 });
