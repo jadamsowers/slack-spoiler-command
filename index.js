@@ -46,9 +46,7 @@ controller.on('bot_channel_join', function (bot, message) {
 })
 
 controller.on('slash_command', function(bot, message) {
-    bot.replyPublicDelayed(message, message.user_name + " used command " + message.command + " args: " + message.text);
-    //bot.replyPublic(message, "PUBLIC INFO");
-    /*if (message.command !== "/spoiler") {
+    if (message.command !== "/spoiler") {
         console.log('Skipping command: ' + message.command);
         return;
     }
@@ -75,7 +73,7 @@ controller.on('slash_command', function(bot, message) {
         spoiler = params.join(' ');
     }
 
-    bot.replyPublic(message, {
+    bot.replyPublicDelayed(message, {
         "response_type": "in_channel",
         "attachments": [{
             "callback_id": "spoiler-callback",
@@ -93,5 +91,5 @@ controller.on('slash_command', function(bot, message) {
                 }
             }]
         }]
-    });*/
+    });
 });
