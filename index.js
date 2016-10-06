@@ -58,7 +58,7 @@ controller.on('slash_command', function(bot, message) {
         spoiler = params.join(' ');
     }
 
-    bot.replyPublic(message, {
+    bot.replyPublicDelayed(message, {
         "response_type": "in_channel",
         "attachments": [{
             "callback_id": "spoiler-callback",
@@ -76,9 +76,11 @@ controller.on('slash_command', function(bot, message) {
                 }
             }]
         }]
-    }, function() {
-        bot.replyAcknowledge();
     });
+    
+    console.log('Forcing an ACK:', bot.res);
+    bot.res.end();
+    console.log('ACK sent');
 });
 
 // receive an interactive message, and reply with a message that will replace the original
