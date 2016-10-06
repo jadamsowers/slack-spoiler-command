@@ -81,7 +81,7 @@ controller.on('slash_command', function(bot, message) {
             }]
         }]
     }, function() {
-        bot.replyAcknowledge();
+        return bot.res.send(200, '');
     });
 });
 
