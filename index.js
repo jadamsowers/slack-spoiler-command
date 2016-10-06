@@ -64,7 +64,7 @@ controller.on('slash_command', function(bot, message) {
         title = '@' + user + ' just posted a spoiler.';
         spoiler = params[0];
     } else {
-        title = user + ' ' + params[0];
+        title = '@' + user + ' just posted a spoiler ' + params[0];
         params.splice(0, 1);
         spoiler = params.join(' ');
     }
