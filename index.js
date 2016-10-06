@@ -92,5 +92,5 @@ controller.on('interactive_message_callback', function(bot, message) {
     }
     
     // check message.actions and message.callback_id to see what action to take...
-    bot.replyPrivateDelayed(message, 'Sike! - Still gotta find the original spoiler text :(');
+    bot.reply(message, 'Sike! - Still gotta find the original spoiler text :(');
 });
