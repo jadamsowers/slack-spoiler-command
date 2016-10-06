@@ -41,17 +41,13 @@ controller.setupWebserver(PORT, function(err, webserver) {
     controller.createWebhookEndpoints(webserver)
 });
 
-controller.on('bot_channel_join', function (bot, message) {
-    bot.reply(message, "I'm here!")
-})
-
 controller.on('slash_command', function(bot, message) {
     if (message.command !== "/spoiler") {
         console.log('Skipping command: ' + message.command);
         return;
     }
     
-    var user = message.user;
+    var user = message.user_name;
     var params = message.text.match(/\w+|"[^"]+"/g); //split our (possibly quoted) params
     if (params.length === 0) {
         bot.replyPrivate(message, {
