@@ -35,13 +35,13 @@ controller.on('slash_command', function(bot, message) {
         return bot.res.send(401, 'Unauthorized');
     }
     if (message.command !== "/spoiler") {
-        return bot.res.send(200, '');
+        bot.replyAcknowledge();
         return;
     }
     
     var user = message.user_name;
     var params = message.text.match(/\w+|"[^"]+"/g); //split our (possibly quoted) params
-    if (params.length === 0) {
+    if (!params || params.length === 0) {
         bot.replyPrivate(message, {
           response_type: 'ephemeral',
           text: 'You didnt enter anything to spoiler text.'
@@ -80,6 +80,8 @@ controller.on('slash_command', function(bot, message) {
                 }
             }]
         }]
+    }, function() {
+        bot.replyAcknowledge();
     });
 });
 
