@@ -1,15 +1,22 @@
-var Botkit = require('botkit')
+var Botkit = require('botkit');
+
 var PORT = process.env.PORT
 if (!PORT) {
     console.error('PORT is required');
     process.exit(1);
 }
 
+var VERIFY_TOKEN = process.env.SLACK_VERIFY_TOKEN
+if (!VERIFY_TOKEN) {
+  console.error('SLACK_VERIFY_TOKEN is required')
+  process.exit(1)
+}
+
 var controller = Botkit.slackbot({
   // reconnect to Slack RTM when connection goes bad
   retry: Infinity,
   debug: false
-})
+});
 
 console.log('Starting in Beep Boop multi-team mode')
 require('beepboop-botkit').start(controller, { debug: true })
@@ -20,7 +27,7 @@ controller.setupWebserver(PORT, function(err, webserver) {
         process.exit(1)
     }
     // Setup our slash command webhook endpoints
-    controller.createWebhookEndpoints(webserver)
+    controller.createWebhookEndpoints(webserver, [VERIFY_TOKEN])
 });
 
 controller.on('slash_command', function(bot, message) {
@@ -51,7 +58,7 @@ controller.on('slash_command', function(bot, message) {
         spoiler = params.join(' ');
     }
 
-    bot.replyPublicDelayed(message, {
+    bot.replyPublic(message, {
         "response_type": "in_channel",
         "attachments": [{
             "callback_id": "spoiler-callback",
