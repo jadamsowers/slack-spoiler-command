@@ -27,6 +27,10 @@ if (token) {
   require('beepboop-botkit').start(controller, { debug: true })
 }
 
+controller.on('bot_channel_join', function (bot, message) {
+  bot.reply(message, "I'm here!")
+})
+
 controller.on('slash_command', function(bot, message) {
     if (message.command !== "spoiler") {
         console.log('Skipping command: ' + message.command);
