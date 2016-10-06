@@ -36,8 +36,6 @@ controller.on('slash_command', function(bot, message) {
         return;
     }
     
-    bot.replyAcknowledge();
-    
     var user = message.user_name;
     var params = message.text.match(/\w+|"[^"]+"/g); //split our (possibly quoted) params
     if (params.length === 0) {
@@ -78,6 +76,8 @@ controller.on('slash_command', function(bot, message) {
                 }
             }]
         }]
+    }, function() {
+        bot.replyAcknowledge();
     });
 });
 
