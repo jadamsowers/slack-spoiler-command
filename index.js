@@ -68,12 +68,18 @@ controller.on('slash_command', function(bot, message) {
             "callback_id": "spoiler-callback",
             "title": title,
             "attachment_type": "default",
-            "fallback": spoiler, //smuggle our spoiler text in through here (sucks to be on an unsupported device)
+            "fallback": "Whoops - looks like your device isnt supported",
             "actions": [{
                 "name": "view",       
                 "text": "Click to view spoiler",
                 "style": "danger",
-                "type": "button"
+                "type": "button",
+                "confirm": {
+                    "title": title,
+                    "text": spoiler,
+                    "ok_text": "Close",
+                    "dismiss_text": "Close"
+                }
             }]
         }]
     }, function() {
@@ -87,9 +93,5 @@ controller.on('interactive_message_callback', function(bot, message) {
         return bot.res.send(401, 'Unauthorized');
     }
     
-    var channel = message.channel;
-    var user = message.user;
-    var spoiler = message.original_message.attachments[0].fallback;
-    // check message.actions and message.callback_id to see what action to take...
-    bot.replyPublic(message, 'OK need to send a message to channel ' + channel + ' and message ' + spoiler);
+    return bot.res.send(200, ''); //do nothing
 });
