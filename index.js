@@ -1,6 +1,11 @@
 var Botkit = require('botkit')
 
 var token = process.env.SLACK_TOKEN
+var PORT = process.env.PORT
+if (!PORT) {
+    console.error('PORT is required');
+    process.exit(1);
+}
 
 var controller = Botkit.slackbot({
   // reconnect to Slack RTM when connection goes bad
@@ -26,6 +31,10 @@ if (token) {
   console.log('Starting in Beep Boop multi-team mode')
   require('beepboop-botkit').start(controller, { debug: true })
 }
+
+controller.setupWebserver(PORT, function(err, webserver) {
+    controller.createWebhookEndpoints(webserver);
+});
 
 controller.on('bot_channel_join', function (bot, message) {
   bot.reply(message, "I'm here!")
