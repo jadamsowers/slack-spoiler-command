@@ -92,5 +92,5 @@ controller.on('interactive_message_callback', function(bot, message) {
     }
     
     // check message.actions and message.callback_id to see what action to take...
-    bot.replyPublicDelayed(message, 'OK need to send a message to channel ' + message.channel_id + '/' + message.channel + ' and message ' + message.original_message.text);
+    bot.replyPublicDelayed(message, 'OK need to send a message to channel ' + message.channel + ' and message keys ' + String(Object.keys(message.original_message)));
 });
