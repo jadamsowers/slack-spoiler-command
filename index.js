@@ -32,6 +32,7 @@ controller.setupWebserver(PORT, function(err, webserver) {
 
 controller.on('slash_command', function(bot, message) {
     if (message.command !== "/spoiler") {
+        console.error('I honestly dont know what to do with command "' + message.command + '"');
         bot.replyPrivate(message, {
           response_type: 'ephemeral',
           text: 'I honestly dont know what to do with command "' + message.command + '"'
