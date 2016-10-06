@@ -68,16 +68,13 @@ controller.on('slash_command', function(bot, message) {
             "callback_id": "spoiler-callback",
             "title": title,
             "attachment_type": "default",
-            "fallback": "Uh oh - doesn't look like your device supports this",
+            "fallback": "Uh oh - doesn't look like your device supports this",            
+            "spoiler": spoiler,
             "actions": [{
                 "name": "view",       
                 "text": "Click to view spoiler",
                 "style": "danger",
-                "type": "button",
-                "confirm": {
-                    "title": "Spoiler",
-                    "text": spoiler
-                }
+                "type": "button"
             }]
         }]
     }, function() {
@@ -92,5 +89,5 @@ controller.on('interactive_message_callback', function(bot, message) {
     }
     
     // check message.actions and message.callback_id to see what action to take...
-    bot.replyPublicDelayed(message, 'OK need to send a message to channel ' + message.channel + ' and message ' + JSON.stringify(message));
+    bot.replyPublicDelayed(message, 'OK need to send a message to channel ' + message.channel + ' and message ' + message.original_message.attachments[0].spoiler + ' || ' + JSON.stringify(message));
 });
